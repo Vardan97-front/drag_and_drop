@@ -1,0 +1,423 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #F2F2F2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C4C4C4;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #C4C4C4;;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+}
+
+.header {
+  width: 95%;
+  margin: 0 auto;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  h3 {
+    color: #8f8f8f;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.35;
+  }
+}
+
+.todo {
+  width: 100%;
+  height: calc(100% - 64px);
+  background-color: #2b51c4;
+  padding: 15px 0;
+
+  .todoContainer {
+    width: 75%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.taskItem {
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  height: 133px;
+
+  .editBlock {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px;
+
+    h5 {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .more {
+      border: 1px solid #d9d9d9;
+      cursor: pointer;
+      transition-duration: .4s;
+      position: relative;
+
+      .editButtonsBlock {
+        position: absolute;
+        top: 30px;
+        right: -30px;
+        box-shadow: 0 0 5px #d9d9d9;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        z-index: 3;
+
+        div {
+          display: flex;
+          align-items: center;
+
+          p {
+            margin: 0;
+            color: black;
+          }
+
+          &:nth-child(2) {
+            svg {
+              color: red;
+            }
+
+            p {
+              color: red;
+            }
+          }
+        }
+      }
+
+      .closeDiv {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        top: 0;
+        left: 0;
+        z-index: 0;
+      }
+
+      svg {
+        padding: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #8f8f8f;
+      }
+
+      &:hover {
+        border-color: #1890ff;
+
+        .moreSvg {
+          color: #1890ff;
+        }
+      }
+    }
+  }
+
+  p {
+    margin-top: 10px;
+    padding: 10px;
+    color: #d9d9d9;
+  }
+}
+
+.list {
+  width: 32%;
+  height: 100%;
+
+  .listHeader {
+    width: 100%;
+    background-color: white;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+    border-radius: 3px 3px 0 0;
+    align-items: center;
+    height: 50px;
+  }
+
+  .listBody {
+    width: 100%;
+    background-color: #d6e4ff;
+    height: calc(100% - 50px);
+    border-radius: 0 0 3px 3px;
+
+    &.hover {
+      background-color: rgb(173, 198, 255);
+    }
+
+    .itemsBlock {
+      padding: 10px;
+      width: 100%;
+      overflow-y: auto;
+      height: 100%;
+
+    }
+  }
+}
+
+.button {
+  background-color: #1e90ff;
+  padding: 8px 16px;
+  transition-duration: 0.4s;
+  border: none;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &.cancel {
+    background-color: transparent;
+    color: black;
+    border: 1px solid #d9d9d9;
+    margin-right: 10px;
+
+    &:hover {
+      border-color: #1890ff;
+      color: #1890ff;
+    }
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.createItem {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ReactModal__Content {
+    border: 0 !important;
+    width: 30%;
+    inset: auto !important;
+    height: auto;
+    padding: 0 !important;
+
+    .closeBlock {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px;
+      text-align: center;
+      align-items: center;
+      border-bottom: 1px solid #d9d9d9;
+
+      p {
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 22px;
+        word-wrap: break-word;
+      }
+
+      svg {
+        color: #8f8f8f;
+        font-size: 20px;
+
+        &:hover {
+          color: black;
+        }
+      }
+    }
+
+    .createItemForm {
+      width: 100%;
+
+      .inputsBorderBlock {
+        border-bottom: 1px solid #d9d9d9;
+
+        .inputsBlock {
+          display: flex;
+          flex-direction: column;
+          width: 90%;
+          max-width: 90%;
+          margin: 0 auto;
+          padding: 30px 0;
+
+          label {
+            display: flex;
+            flex-direction: column;
+
+            &.textareaLabel {
+              margin-top: 25px;
+            }
+
+            p {
+              font-size: 16px;
+
+              &:before {
+                content: '*';
+                color: red;
+                margin-right: 5px;
+                font-size: 14px;
+              }
+            }
+
+            span {
+              color: red;
+              margin-top: 5px;
+            }
+
+            input, textarea {
+              border-radius: 3px;
+              transition-duration: .3s;
+              padding: 10px;
+              outline: none;
+              margin-top: 10px;
+              width: 100%;
+              max-width: 100%;
+              min-width: 100%;
+              min-height: 37px;
+
+              &.error {
+                border: 1px solid red;
+
+                &:focus {
+                  border-color: red;
+                  box-shadow: 0 0 5px red;
+                  outline-color: red;
+                }
+              }
+
+              &.success {
+                border: 1px solid #d9d9d9;
+
+                &:focus {
+                  border-color: #1890ff;
+                  box-shadow: 0 0 5px #1890ff;
+                  outline-color: #1890ff;
+                }
+              }
+            }
+
+            &:hover {
+              input, textarea {
+                &.success {
+                  border-color: #1890ff;
+                }
+
+                &.error {
+                  border-color: red;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .modalButtonsBlock {
+        width: 92%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: flex-end;
+        padding: 15px 0;
+      }
+    }
+  }
+}
+
+.DeleteItem {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .ReactModal__Content {
+    border: 0 !important;
+    width: 25%;
+    inset: auto !important;
+    height: auto;
+    padding: 0 !important;
+
+    .deleteContainer {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    .askBlock {
+      display: flex;
+      align-items: center;
+
+      svg {
+        color: #f3ac13;
+      }
+
+      span {
+        margin-left: 15px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.4;
+        display: block;
+      }
+    }
+
+    .question {
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 1.4;
+      display: block;
+      margin-left: 40px;
+      margin-top: 10px;
+    }
+
+    .modalButtonsBlock {
+      width: 92%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px 0;
+    }
+  }
+}
